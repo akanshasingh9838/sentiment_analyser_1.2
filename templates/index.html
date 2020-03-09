@@ -1,0 +1,160 @@
+
+{% extends 'bootstrap/base.html' %}
+{% block content %}
+
+    <style type="text/css">
+    .contain
+{
+margin-left:25px;
+margin-top:20px;
+width:365px;
+height:350px;
+background:white;
+border:2px solid rgb(182, 3, 3);
+border-radius:10px;
+float:left;
+margin:5px;
+padding-bottom:0;
+overflow:hidden;
+}
+.box
+{
+    background-color: yellow;
+    border: 1px solid red;
+    margin-left: 20px;
+    margin-right:20px;
+    height:20px;
+   
+}
+.contain img
+{
+    width:230px;
+    height:190px;
+    text-align:center;
+    display: block;
+    margin-left:auto;
+    margin-right: auto 
+}
+.contain h5
+{
+    text-align:center;
+    color: blue;
+    text-decoration: underline;
+    letter-spacing: 2px;
+    word-spacing: 5px;
+    font-weight: bold;
+}
+.jumbotron {
+    color: black;
+    font-weight:bold;
+    text-shadow: blue 0.3em 0.3em 0.3em;
+    background:url(static/images/tweetback.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+}
+.jumbotron img {
+    width:100;
+    height:100;
+}
+.data {
+    font-size: 10pt; 
+    font-family: Arial;
+    border-collapse: collapse; 
+    border: 1px solid rgb(129, 11, 11);
+
+}
+.data td, th {
+    padding: 5px;
+}
+
+.data tr:nth-child(even) {
+    background: #E0E0E0;
+}
+
+.data tr:hover {
+    background: silver;
+    cursor: pointer;
+}
+.data th{
+    font-size: 18px;
+    text-align:center;
+    text-transform: uppercase;
+}
+.box1 img {
+   
+    border-radius:50%;
+    height: 100px;
+    width: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+   
+}
+
+    </style>
+
+<div class="container">
+    <div class="jumbotron text-center">
+        <img src="static\images\tweetanalyse.png">
+        <h2><bold>SENTIMENT ANALYSER</bold></h2>
+    </div>
+</div>
+
+<div class="container">
+    <form action="{{url_for('analyse')}}" method='POST' id="myform">
+        <center><bold><h2 style = "color:red">INPUT HASHTAG</h2></bold></center>
+        <center><input type="text" name="text1" size="30"></center><br>
+        <center>
+            <input type="submit" name="action" value="Submit" class="btn btn-primary">
+            <input type="reset" name="action" value="Clear" class="btn btn-outline-primary">
+        </center>
+        <div class="box1">
+            <img src="{{profile_banner}}">
+            <img src="{{profile_pic}}">
+        </div>
+        <div class="contain">
+            <h5>POSITIVE TWEETS</h5>
+            <img src="static\images\positive.jpg"><br>
+            <div class="box">
+            <center style="font-size:15px ;font-weight:bold;text-shadow: mediumblue;"> NUMBER OF POSITIVE TWEETS : {{positive}}</center>
+            <br>
+            <center><a href="/positive" name="action" value="view_positive" class="btn btn-primary" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagi." >VIEW DETAILS</a></center>
+            </div>
+        </div>
+       
+        <div class="contain">
+          <h5>NEUTRAL TWEETS</h5>
+            <img src="static\images\neutral.jpg"><br>
+            <div class="box">
+            <center style="font-size:15px ;font-weight:bold;text-shadow: mediumblue;">NUMBER OF NEUTRAL TWEETS : {{neutral}}</center>
+            <br>
+            <center><a href="/neutral" name="action" value="view_neutral" class="btn btn-primary">VIEW DETAILS</a></center>
+            </div>
+         </div>
+
+         <div class="contain">
+                <h5>NEGATIVE TWEETS</h5>
+                  <img src="static\images\negative1.jpg"><br>
+                  <div class="box">
+                  <center style="font-size:15px ;font-weight:bold;text-shadow: mediumblue;">NUMBER OF NEGATIVE TWEETS : {{negative}}</center>
+                  <br>
+                  <center><a href="/negative" name="action" value="view_negative" class="btn btn-primary">VIEW DETAILS</a></center>
+                 </div>
+          </div>
+          <div class="button">
+               
+              <p style="font-size:20px;font-weight:bold;color:rgb(99, 17, 17);text-align:center;text-transform:uppercase;padding-top:10px;">view in twitter</p>
+              <center><a href="{{search_url}}" name="action" value="view_positive" class="btn btn-primary"  >TWEETS</a></center>
+
+          </div>
+          <div class="con">
+                {% for table in tables %}
+                {{titles[loop.index]}}
+                {{ table|safe }}
+                 {% endfor %}
+          </div>
+              
+    </form>
+</div>
+{% endblock %}

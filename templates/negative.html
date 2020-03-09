@@ -1,0 +1,60 @@
+{% extends 'bootstrap/base.html' %}
+{% block content %}
+
+<style type ="text/css">
+.container 
+{
+    color:maroon;
+    
+}
+.jumbotron 
+{
+    font-size:50px;
+    font-weight:bold;
+    background-image:url("static/images/negBack1.jpg");
+    color:white;
+    background-repeat:initial;
+}
+.contain 
+{
+    border: 2px solid rgb(182, 3, 3);
+    height:200px;
+    font-size: 20px;
+    background-color:white;
+    margin:3px;
+    padding:3px;
+}
+.whole 
+{
+    background-color:rgba(182, 44, 85, 0.973);
+}
+</style>
+<div class="whole">
+<div class = "container">
+    <div class="jumbotron text-center">
+          NEGATIVE TWEETS
+    </div>
+</div>
+
+<div class="container">
+        {% for j,k,q,h in neg_content %}
+<div class="contain">
+        
+        {{j}}
+        <br><br><br>
+        <br>
+        <a href="{{search_url}}/status/{{h}}" name="action" value="view_tweet" class="btn btn-primary">VIEW TWEET</a>
+        retweets:
+        {{q}}
+        <img src="static\images\re.png">
+        likes:
+        {{k}}
+        <img src="static\images\heart.jpg">
+</div>
+<br><br>
+{% endfor %}
+{%endblock%}
+</div>
+</div>
+
+
